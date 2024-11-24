@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Career Results | S.A.P AI</title>
+    <link rel="stylesheet" href="../style-main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="results-page">
+    <main class="results-main">
+        <div class="results-header">
+            <h1>Your Career Match Results</h1>
+            <p>Based on your responses, here are your top career matches:</p>
+        </div>
+
+        <div class="results-container">
+            <div class="career-matches" id="careerMatches">
+                <!-- Career matches will be inserted here -->
+            </div>
+
+            <!-- Premium Options Section -->
+            <div class="premium-options">
+                <div class="premium-card unlock-report">
+                    <div class="premium-header">
+                        <h2>🌟 Unlock Your Full Career Report</h2>
+                        <span class="price">$29.99</span>
+                    </div>
+                    <ul class="premium-features">
+                        <li>✓ Detailed personality analysis</li>
+                        <li>✓ Complete career compatibility breakdown</li>
+                        <li>✓ Salary expectations & growth potential</li>
+                        <li>✓ Educational pathway recommendations</li>
+                        <li>✓ Downloadable PDF report</li>
+                    </ul>
+                    <button class="premium-btn">Unlock Full Report</button>
+                </div>
+
+                <div class="premium-card counseling">
+                    <div class="premium-header">
+                        <h2>👨‍💼 Premium Career Counseling</h2>
+                        <span class="price">$99.99</span>
+                    </div>
+                    <ul class="premium-features">
+                        <li>✓ 1-hour personal consultation</li>
+                        <li>✓ Custom career action plan</li>
+                        <li>✓ Resume & interview tips</li>
+                        <li>✓ Industry expert matching</li>
+                        <li>✓ 30-day email support</li>
+                    </ul>
+                    <button class="premium-btn">Schedule Consultation</button>
+                </div>
+            </div>
+
+            <!-- Career Resources Section -->
+            <div class="career-resources">
+                <h2>Free Career Resources</h2>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">📚</div>
+                        <h3>Career Guide Library</h3>
+                        <p>Access our collection of career guides and industry insights</p>
+                        <a href="#" class="resource-link">Browse Guides</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">📝</div>
+                        <h3>Resume Templates</h3>
+                        <p>Download professional resume templates for your field</p>
+                        <a href="#" class="resource-link">Get Templates</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">🎯</div>
+                        <h3>Job Search Tips</h3>
+                        <p>Learn effective strategies for your job search</p>
+                        <a href="#" class="resource-link">Read Tips</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="career.html" class="retake-btn">Retake Test</a>
+            <a href="../index.html" class="home-btn">Back to Home</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const results = JSON.parse(sessionStorage.getItem('careerResults'));
+            const matchesContainer = document.getElementById('careerMatches');
+            
+            // Career category details
+            const careerDetails = {
+                technology: {
+                    title: 'Technology',
+                    careers: ['Software Developer', 'UX Designer', 'Cybersecurity Analyst'],
+                    icon: '💻',
+                    color: '#3b82f6'
+                },
+                creative: {
+                    title: 'Creative Arts',
+                    careers: ['Graphic Designer', 'Digital Artist', 'Multimedia Producer'],
+                    icon: '🎨',
+                    color: '#ec4899'
+                },
+                business: {
+                    title: 'Business',
+                    careers: ['Business Manager', 'Marketing Director', 'International Business Consultant'],
+                    icon: '📈',
+                    color: '#10b981'
+                },
+                science: {
+                    title: 'Science',
+                    careers: ['Research Scientist', 'Data Analyst', 'Environmental Scientist'],
+                    icon: '🔬',
+                    color: '#6366f1'
+                },
+                healthcare: {
+                    title: 'Healthcare',
+                    careers: ['Physical Therapist', 'Mental Health Counselor', 'Healthcare Administrator'],
+                    icon: '⚕️',
+                    color: '#ef4444'
+                },
+                education: {
+                    title: 'Education',
+                    careers: ['Teacher', 'Educational Content Developer', 'Training Specialist'],
+                    icon: '📚',
+                    color: '#f59e0b'
+                }
+            };
+
+            // Display results
+            results.forEach(([category, score], index) => {
+                const details = careerDetails[category];
+                const matchEl = document.createElement('div');
+                matchEl.className = 'career-match';
+                matchEl.style.animationDelay = `${index * 0.2}s`;
+                
+                matchEl.innerHTML = `
+                    <div class="match-header" style="background: ${details.color}">
+                        <span class="match-icon">${details.icon}</span>
+                        <h2>${details.title}</h2>
+                        <div class="match-score">${Math.round(score)}% Match</div>
+                    </div>
+                    <div class="match-careers">
+                        <h3>Suggested Careers:</h3>
+                        <ul>
+                            ${details.careers.map(career => `<li>${career}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                
+                matchesContainer.appendChild(matchEl);
+            });
+        });
+    </script>
+</body>
+</html> 
